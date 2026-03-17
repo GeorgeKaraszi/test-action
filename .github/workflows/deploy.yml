@@ -21,6 +21,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     environment: production
+    steps:
+      - name: Request approval
+        run: echo Waiting for approval...
 
   deploy:
     needs: approval
