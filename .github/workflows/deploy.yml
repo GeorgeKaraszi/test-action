@@ -1,0 +1,26 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run a one-line script
+        run: echo Hello, world!
+      - name: Manual Workflow Approval
+        uses: trstringer/manual-approval@v1.12.0
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: GeorgeKaraszi
+          minimum-approvals: 1
+          issue-title: "Deploying v1.3.5 to prod from staging"
+          issue-body: "Please approve or deny the deployment of version v1.3.5."
+          exclude-workflow-initiator-as-approver: false
+          fail-on-denial: true
+      - name: Deploy to production
+        run: echo Deploying to production...
