@@ -2,6 +2,15 @@ name: Deploy
 
 on:
   workflow_dispatch:
+    inputs:
+      app:
+        description: 'The application to deploy'
+        required: true
+        type: choice
+        options:
+          - app1
+          - app2
+          - app3
   push:
     branches: [main, deploy/production]
 
